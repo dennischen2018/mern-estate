@@ -50,8 +50,6 @@ export default function SignUp() {
       setError(error.message);
     }
 
-
-
   }
 
   return (
