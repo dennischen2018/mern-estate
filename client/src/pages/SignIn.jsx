@@ -24,7 +24,7 @@ export default function SignIn() {
 
     e.preventDefault();
     // setLoading(true);
-    dispatch (signInStart)
+    dispatch (signInStart())
 
     try {
       const res = await fetch('/api/auth/signin', 
