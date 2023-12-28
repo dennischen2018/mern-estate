@@ -38,8 +38,9 @@ export const signin = async(req, res, next) => {
             return next(errorHandler(410, 'Wrong credentials!'))
         }
         const token = jwt.sign({id: validUser._id}, process.env.JWT_SECRET);
+
         const {password: pass, ...rest } = validUser._doc;
-    
+        console.log('... sign return', rest);
         res.cookie('access_token', token, {httpOnly: true});
         res.status(200).json(rest);
     } catch (error) {
@@ -50,12 +51,14 @@ export const signin = async(req, res, next) => {
 
 export const google = async (req, res, next) => {
     console.log('....google().....')
-    console.log('....body...', req.body)
+    console.log('....request body...', req.body)
     try {
         const user = await User.findOne({email: req.body.email})
         if (user) {
+            console.log('.... found user in Mongo DB ....', user)
             const token = jwt.sign({id: user._id}, process.env.JWT_SECRET)
             const { password: pass, ...rest } = user._doc;
+            console.log('... google signin call return', rest)
             res.cookie('access_token', token, { httpOnly: true})
             .status(200)
             .json(rest)
