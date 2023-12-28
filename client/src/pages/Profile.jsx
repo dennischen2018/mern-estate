@@ -13,7 +13,10 @@ import {
   updateUserFailure,
   deleteUserStart,
   deleteUserSuccess,
-  deleteUserFailure
+  deleteUserFailure,
+  signOutUserStart,
+  signOutUserSuccess,
+  signOutUserFailure
 } from "../redux/user/userSlice.js";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -122,6 +125,26 @@ export default function Profile() {
     } catch (error) {
       dispath(deleteUserFailure(error.message))
     }
+  };
+
+  const handleSignOut = async () => {
+    console.log('...handleSignOut...')
+    try {
+      dispath(signOutUserStart())
+      const res = await fetch(`/api/auth/signout`);
+      const data = await res.json();
+      console.log('...success', data.success)
+      if (data.success === false) {
+        dispath(signOutUserFailure(data.message))
+      }
+
+      dispath(signOutUserSuccess(data))
+      navigate('/signin')
+
+    } catch (error) {
+      console.log('..error', error)
+      dispath(signOutUserFailure(error.message))
+    }
   }
 
   return (
@@ -168,7 +191,7 @@ export default function Profile() {
           className="text-red-700 cursor-pointer">
           Delete Account
         </span>
-        <span className="text-red-700 cursor-pointer">Sign out</span>
+        <span onClick={handleSignOut} className="text-red-700 cursor-pointer">Sign out</span>
       </div>
 
       <p className="text-green-700 mt-5">{updateSuccess ? "User is updated successfully!" : ""}</p>
