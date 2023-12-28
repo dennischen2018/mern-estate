@@ -47,7 +47,7 @@ export default function SignIn() {
 
       dispatch (signInSuccess (data))
       console.log('>>> navigate to home page...')
-      navigate('/')
+      navigate('/') 
 
     } catch (error) {
         dispatch(signInFailure(error.message))

@@ -34,7 +34,7 @@ export default function OAuth() {
             console.log('==OAuth-> fetch /api/auth/goole/ data', data)
 
             dispatch(signInSuccess(data));
-            navigate ("/")
+            // navigate ("/")
         } catch (error) {
             console.log('Could not sign in with google', error)
         }
