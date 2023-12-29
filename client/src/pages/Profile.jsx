@@ -19,7 +19,7 @@ import {
   signOutUserFailure
 } from "../redux/user/userSlice.js";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 export default function Profile() {
@@ -184,7 +184,10 @@ export default function Profile() {
                     hover:opacity-90 disabled: opacity-80">
             {loading ? 'Loading...': 'Update'} 
         </button>
-        
+        <Link to={"/create-listing"} className="bg-green-700 text-white p-3
+                  rounded-lg hover:opacity-90 disabled: opacity-80 text-center uppercase">
+            Create Listing
+        </Link>
       </form>
       <div className="flex justify-between mt-5">
         <span onClick={handleDeleteUser}
