@@ -184,7 +184,7 @@ export default function Profile() {
   }
 
   const handleListingEdit = async (listingId) => {
-
+    console.log('...handle listing edit.. listingId', listingId)
     try {
       
     } catch (error) {
@@ -271,8 +271,16 @@ export default function Profile() {
               </Link>
               {/* -------- Delete and Edit Lising Buttons ------- */}
               <div className="flex flex-col items-center">
-                <button type="button" onClick={()=>handleListingDelete(listing._id)} className="text-red-700">Delete</button>
-                <button type="button" onClick={()=>handleListingEdit(listing._id)} className="text-green-700">Edit</button>
+                <button type="button" onClick={()=>handleListingDelete(listing._id)} 
+                  className="text-red-700">
+                    Delete
+                </button>
+                <Link to={`/update-listing/${listing._id}`}>
+                  <button type="button" onClick={()=>handleListingEdit(listing._id)} 
+                    className="text-green-700">
+                      Edit
+                  </button>
+                </Link>
               </div>
             </div>
           )}  
