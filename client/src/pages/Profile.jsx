@@ -165,6 +165,33 @@ export default function Profile() {
     }
   }
 
+  const handleListingDelete = async (listingId) => {
+    console.log('...handle listing delete... listingId', listingId)
+    try {
+      const res = await fetch(`/api/listing/delete/${listingId}`, {
+        method: 'DELETE'
+      })
+      const data = await res.json();
+      if (data.success === false) {
+        console.log(data.message);
+        return;
+      }
+
+      setUserListings( prev => prev.filter((listing) => listing._id != listingId))
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
+  const handleListingEdit = async (listingId) => {
+
+    try {
+      
+    } catch (error) {
+      
+    }
+  }
+
 
   return (
     <div className="p-3 max-w-lg mx-auto">
@@ -236,16 +263,16 @@ export default function Profile() {
                   items-center gap-4">
               <Link to="`/listing/${listing._id}">
                 <img src={listing.imageUrls[0]} alt="listing cover" 
-                  className="h-16 w-16 object-contain"/>
+                  className="h-12 w-24 object-contain"/>
               </Link>
               <Link to="`/listing/${listing._id}"
                 className="text-slate-700 font-semibold flex-1 hover:underline truncate">
                 <p>{listing.name}</p>
               </Link>
-
+              {/* -------- Delete and Edit Lising Buttons ------- */}
               <div className="flex flex-col items-center">
-                <button className="text-red-700">Delete</button>
-                <button className="text-green-700">Edit</button>
+                <button type="button" onClick={()=>handleListingDelete(listing._id)} className="text-red-700">Delete</button>
+                <button type="button" onClick={()=>handleListingEdit(listing._id)} className="text-green-700">Edit</button>
               </div>
             </div>
           )}  
