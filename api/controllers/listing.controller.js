@@ -63,6 +63,7 @@ export const updateListing  = async (req, res, next) => {
 }
 
 export const getListing = async (req, res, next) => {
+    console.log('... get listing ... req.params.id', req.params.id)
     try {
         const listing = await Listing.findById(req.params.id)
         console.log('..listing', listing)

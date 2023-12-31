@@ -173,7 +173,7 @@ export default function CreateListing() {
                 <input type="text" id="name" placeholder="Name" maxLength='62' minLength='10' 
                     value={formData.name} onChange={handleChange} 
                     className="border p-3 rounded-lg" required />
-                <input type="textarea" id="description" placeholder="Description" maxLength='62' minLength='10' 
+                <textarea id="description" placeholder="Description" maxLength='500' minLength='10' 
                     value={formData.description} onChange={handleChange} 
                     className="border p-3 rounded-lg" required />              
                 <input type="text" id="address" placeholder="Address" 
@@ -227,7 +227,9 @@ export default function CreateListing() {
                             className="p-3 border border-gray-300 rounded-lg" required/>
                         <div className="flex flex-col items-center">
                             <p>Regular price</p>
-                            <span>($ / month)</span>
+                            {formData.type === 'rent' && 
+                                <span>($ / month)</span>
+                            }
                         </div>
                     </div>
                     {formData.offer ?
@@ -237,7 +239,9 @@ export default function CreateListing() {
                             className="p-3 border border-gray-300 rounded-lg" required/>
                         <div className="flex flex-col items-center">
                             <p>Discount price</p>
-                            <span>($ / month)</span>
+                            {formData.type === 'rent' && 
+                                <span>($ / month)</span>
+                            }
                         </div>
                     </div> : ''
                     } 
