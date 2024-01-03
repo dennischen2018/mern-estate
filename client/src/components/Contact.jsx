@@ -31,7 +31,6 @@ export default function Contact({listing}) {
     setMessage(e.target.value);
   }
 
-
   return (
     <>
     {landlord &&
